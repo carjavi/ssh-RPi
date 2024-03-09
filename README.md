@@ -218,7 +218,7 @@ sudo systemctl restart ssh
 <br>
 
 
-## How to Set Up SSH Key on Windows 10 (console Git bash)
+## How to Set Up SSH Key on Windows 11 (console Git bash)
 (with PowerShell / GitBash Terminal)
 
 1. generate SSH keypair
