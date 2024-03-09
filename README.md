@@ -106,6 +106,7 @@ ssh-rsa <REALLY LONG STRING OF RANDOM CHARACTERS> user@host
 
 
 ## Copy your Key to your Raspberry Pi
+## From Linux
 Using the computer which you will be connecting from, append the public key to your authorized_keys file on the Raspberry Pi by sending it over SSH:
 ```
 ssh-copy-id <USERNAME>@<IP-ADDRESS>
@@ -217,7 +218,7 @@ sudo systemctl restart ssh
 <br>
 
 
-## How to Set Up SSH Key on Windows 10 
+## How to Set Up SSH Key on Windows 10 (console Git bash)
 (with PowerShell / GitBash Terminal)
 
 1. generate SSH keypair
@@ -235,12 +236,47 @@ si hay error revisar Troubleshooting
 ```
 ssh username@remote_host
 ```
+## Metodo 2
+```
+type $env:USERPROFILE\.ssh\id_rsa.pub | ssh {IP-ADDRESS-OR-FQDN} "cat >> .ssh/authorized_keys"
+```
 
+In this example, I am copying the contents of the id_rsa.pub public key to a remote Linux device at IP address 192.168.2.2
+
+```
+type $env:carja\.ssh\id_rsa.pub | ssh 192.168.2.2 "cat >> .ssh/authorized_keys"
+```
+
+## Metodo 3
+```
+c:\>ssh user@lnxhost "umask 077; test -d .ssh || mkdir .ssh ; cat >> .ssh/authorized_keys || exit 1" < \\path_to_where_the_file_was_generated_from_ssh_key_gen\id_rsa.pub
+```
+
+## Metodo 4
+```
+cd C:\Users\yourUserName\
+scp authorized_keys login-id@ubuntu-Host-Ip:~/.ssh
+```
 
 
 <br>
 
-## Copying Files to your Raspberry Pi from SSH
+# What the “Warning: Remote Host Identification Has Changed” Error Is
+The error is related to your Secure Shell (SSH) keys and the server “fingerprint” a client will check for.
+
+<p align="center"><img src="./img/error-ssh.jpg" height="400" alt=" " /></p>
+
+It 's for Windows:
+
+1. <kbd>Win</kbd> + <kbd>r</kbd> y escribir ```%USERPROFILE%```
+
+2. Buscar la carpeta ```.ssh ```. Busca el archivo ```known_hosts```. Abrirlo con el Bloc de notas.
+
+3. Quitar la clave defectuosa dentro del archivo ```known_hosts``` que acaba de abrir con un bloc de notas, verá una lista de claves que utiliza su protocolo SSH para establecer conexiones de acceso remoto. Localice la clave defectuosa usando el código de error y simplemente elimínela. Cierra el Bloc de notas, guarda los cambios y listo.
+
+<br>
+
+# Copying Files to your Raspberry Pi from SSH
 ```
 scp myfile.txt pi@192.168.1.3:
 ```
@@ -248,7 +284,7 @@ Copy the file to the /home/pi/project/ directory on your Raspberry Pi (the proje
 ```
 scp myfile.txt pi@192.168.1.3:project/
 ```
-### Copying Files from your Raspberry Pi
+## Copying Files from your Raspberry Pi
 Copy the file myfile.txt from your Raspberry Pi to the current directory on your other computer:
 ```
 scp pi@192.168.1.3:myfile.txt .
@@ -260,7 +296,7 @@ scp m*.txt pi@192.168.1.3:
 
 ```
 
-### Copying a Whole Directory
+## Copying a Whole Directory
 Copy the directory project/ from your computer to the pi user’s home folder of your Raspberry Pi at the IP address 192.168.1.3
 ```
 scp -r project/ pi@192.168.1.3:
