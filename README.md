@@ -278,6 +278,19 @@ It 's for Windows:
 
 # Copying Files to your Raspberry Pi from SSH
 ```
+scp [OPTION] [user@]SRC_HOST:]file1 [user@]DEST_HOST:]file2
+[user@]SRC_HOST:]file1 - Path to the source file.
+[user@]DEST_HOST:]:file2 - Path to the destination file.
+scp provides a number of options that control every aspect of its behavior. The most widely used options are:
+
+-P - Specifies the remote host ssh port.
+-p - Preserves file modification and access times.
+-q - Use this option if you want to suppress the progress meter and non-error messages.
+-C - This option forces scp to compress the data as it is sent to the destination machine.
+-r - This option tells scp to copy directories recursively.
+```
+
+```
 scp myfile.txt pi@192.168.1.3:
 ```
 Copy the file to the /home/pi/project/ directory on your Raspberry Pi (the project folder must already exist):
