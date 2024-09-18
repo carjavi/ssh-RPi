@@ -191,7 +191,7 @@ Creating and Using SSH Keys with GUI: https://www.purdue.edu/science/scienceit/s
 
 <br>
 
-## Troubleshooting SSH UBUNTU 20.4
+# Troubleshooting SSH UBUNTU 20.4
 
 ### SSH Permission Denied (publickey) 
 probar si esta corriendo el servivio de SSH
@@ -266,7 +266,21 @@ The error is related to your Secure Shell (SSH) keys and the server “fingerpri
 
 <p align="center"><img src="./img/error-ssh.jpg" height="400" alt=" " /></p>
 
-It 's for Windows:
+## Linux:
+```
+ssh-keygen -R <ip-dispositivo>
+```
+Tenga en cuenta que si se conectó a través de un puerto específico, es posible que deba eliminarlo con una sintaxis como:
+```
+ssh-keygen -R [127.0.0.1]:3022
+```
+
+Another option:
+```
+rm ~/.ssh/known_hosts
+```
+
+## It 's for Windows:
 
 1. <kbd>Win</kbd> + <kbd>r</kbd> y escribir ```%USERPROFILE%```
 
